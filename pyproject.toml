@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "leonardo_api"
-version = "0.0.4"
+version = "0.0.5"
 authors = [
   { name="Iliya Vereshchagin", email="i.vereshchagin@gmail.com" },
 ]
@@ -75,7 +75,13 @@ extend-ignore = """
     I004,
     WPS110,
     WPS420,
-    C812
+    C812,
+    W1203,
+    R0801,
+    WPS305,
+    WPS226,
+    DAR401,
+    WPS237
 """
 
 [tool.pylint]

@@ -58,3 +58,30 @@ Finally, you'll get your array of images:
 ![The quick brown fox jumps over the lazy dog](https://raw.githubusercontent.com/wwakabobik/leonardo_api/master/src/assets/fox.jpeg)
 
 You'll find descriptions for rest of the methods in official [API reference](https://docs.leonardo.ai/reference).
+
+---
+
+As option, you may want to use pre-loaded dicts with models (nsfw/community/platform):
+
+```python
+    from leonardo_api import platform_models, custom_models, nsfw_models
+```
+
+Which contains details of models like following:
+
+```python
+{
+    "data": {
+        "custom_models": [
+            {
+                "id": "f1929ea3-b169-4c18-a16c-5d58b4292c69",
+                "name": "RPG v5",
+                # rest of the model data
+            }
+            # rest models
+        ]
+    }
+}
+```
+
+Have fun and enjoy!

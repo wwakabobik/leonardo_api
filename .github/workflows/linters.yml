@@ -31,6 +31,7 @@ jobs:
         pip install mypy reorder-python-imports
         pip install wemake-python-styleguide reorder-python-imports
         pip install black reorder-python-imports
+        pip install types-all reorder-python-imports
 
     - name: Analysing the code with pylint
       id: pylint
@@ -82,7 +83,7 @@ jobs:
         fi
     - name: Check runner state
       run: |
-        if [[ "${{ steps.pylint.outcome }}" == "failure" || "${{ steps.black.outcome }}" == "failure" ]] || "${{ steps.mypy.outcome }}" == "failure" ]]; then
+        if [[ "${{ steps.pylint.outcome }}" == "failure" || "${{ steps.black.outcome }}" == "failure" || "${{ steps.mypy.outcome }}" == "failure" ]]; then
           echo "Linters failed, refer to related sections for info"
           exit 1
         fi
