@@ -31,7 +31,8 @@ jobs:
         pip install mypy reorder-python-imports
         pip install wemake-python-styleguide reorder-python-imports
         pip install black reorder-python-imports
-        mypy --install-types
+        pip install types-pip reorder-python-imports
+        types-pip install -r requirements.txt
 
     - name: Analysing the code with pylint
       id: pylint

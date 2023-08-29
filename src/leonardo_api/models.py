@@ -13,6 +13,7 @@ This file contains dicts with lists of models, split by nsfw/sfw custom models a
 
 # pylint: disable=too-many-lines
 # pylint: disable=line-too-long
+# flake8: noqa
 
 
 nsfw_models = {
