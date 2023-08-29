@@ -112,6 +112,7 @@ class Leonardo:
                             Requires a model based on SD v1.5
         :param control_net_type: The type of ControlNet to use.
         """
+        # pylint: disable=too-many-locals
         url = "https://cloud.leonardo.ai/api/rest/v1/generations"
         payload = {
             "prompt": prompt,
@@ -642,8 +643,6 @@ class Leonardo:
                     if image_index >= len(images):
                         raise IndexError("Incorrect image index")
                     return images[image_index]
-                else:
-                    return images
 
             await asyncio.sleep(poll_interval)
 
