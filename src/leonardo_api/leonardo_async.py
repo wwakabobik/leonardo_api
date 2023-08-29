@@ -455,6 +455,7 @@ class Leonardo:
         :param dataset_id: The ID of the dataset to which the image will be uploaded.
         :param file_path: The path to the image file.
         """
+        # pylint: disable=too-many-locals
         valid_extensions = ["png", "jpg", "jpeg", "webp"]
         extension = os.path.splitext(file_path)[1].strip(".")
         if extension not in valid_extensions:
