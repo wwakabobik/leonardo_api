@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-Filename: chatgpt.py
+Filename: leonardo_async.py
 Author: Iliya Vereshchagin
 Copyright (c) 2023. All rights reserved.
 
@@ -249,8 +249,8 @@ class Leonardo:
             upload_url = data["uploadInitImage"]["url"]
             fields = json.loads(data["uploadInitImage"]["fields"])
 
-            async with aiofiles.open(file_path, "rb") as f:
-                file_data = await f.read()
+            async with aiofiles.open(file_path, "rb") as file:
+                file_data = await file.read()
 
             fields.update({"file": file_data})
 
@@ -464,8 +464,8 @@ class Leonardo:
             upload_url = data["uploadDatasetImage"]["url"]
             fields = json.loads(data["uploadDatasetImage"]["fields"])
 
-            async with aiofiles.open(file_path, "rb") as f:
-                file_data = await f.read()
+            async with aiofiles.open(file_path, "rb") as file:
+                file_data = await file.read()
 
             fields.update({"file": file_data})
 

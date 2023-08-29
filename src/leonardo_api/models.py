@@ -1,3 +1,20 @@
+# -*- coding: utf-8 -*-
+"""
+Filename: models.py
+Author: Iliya Vereshchagin
+Copyright (c) 2023. All rights reserved.
+
+Created: 29.08.2023
+Last Modified: 29.08.2023
+
+Description:
+This file contains dicts with lists of models, split by nsfw/sfw custom models and platform models
+"""
+
+# pylint: disable=too-many-lines
+# pylint: disable=line-too-long
+
+
 nsfw_models = {
     "data": {
         "custom_models": [
