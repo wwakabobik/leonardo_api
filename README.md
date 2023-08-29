@@ -2,7 +2,13 @@
 
 This package contains Python API for [Leonardo.ai](https://leonardo.ai/) based on official [API documentation](https://docs.leonardo.ai/reference).
 
-This python API provides access to Leonardo API using synchronous methods (based on requests library) as well as asynchronous (aiohttp). You can choose one of them - `Leonardo` or `LeonardoAsync`.
+To install the package, please use package from [pypi](https://pypi.org/project/leonardo-api/):
+
+```bash
+    pip install leonardo-api
+```
+
+This Python API provides access to Leonardo API using synchronous methods (based on requests library) as well as asynchronous (aiohttp). You can choose one of them - `Leonardo` or `LeonardoAsync`.
 
 To start, you must have paid subscription and create an API access token from you [settings page](https://app.leonardo.ai/settings)->User API. Then, init manager class with using your access_token:
 
