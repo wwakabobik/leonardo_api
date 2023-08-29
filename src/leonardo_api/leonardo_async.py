@@ -15,6 +15,7 @@ import asyncio
 import json
 import logging
 import os
+from typing import Optional
 
 import aiofiles
 import aiohttp
@@ -65,24 +66,24 @@ class Leonardo:
     async def post_generations(
         self,
         prompt: str,
-        negative_prompt: str = None,
-        model_id: str = None,
-        sd_version: str = None,
+        negative_prompt: Optional[str] = None,
+        model_id: Optional[str] = None,
+        sd_version: Optional[str] = None,
         num_images: int = 4,
         width: int = 512,
         height: int = 512,
         num_inference_steps: int = 40,
         guidance_scale: int = 7,
-        init_generation_image_id: str = None,
-        init_image_id: str = None,
+        init_generation_image_id: Optional[str] = None,
+        init_image_id: Optional[str] = None,
         init_strength: float = None,
-        scheduler: str = None,
-        preset_style: str = None,
+        scheduler: Optional[str] = None,
+        preset_style: Optional[str] = None,
         tiling: bool = False,
         public: bool = False,
         prompt_magic: bool = True,
         control_net: bool = False,
-        control_net_type: str = None,
+        control_net_type: Optional[str] = None,
     ):
         """
         This endpoint will generate images.
@@ -328,7 +329,7 @@ class Leonardo:
             self.___logger.error(f"Error occurred while get variation by id: {str(error)}")
             raise
 
-    async def create_dataset(self, name: str, description: str = None):
+    async def create_dataset(self, name: str, description: Optional[str] = None):
         """
         This endpoint creates a new dataset.
 
@@ -471,11 +472,11 @@ class Leonardo:
         name: str,
         dataset_id: str,
         instance_prompt: str,
-        description: str = None,
+        description: Optional[str] = None,
         model_type: str = "GENERAL",
         nsfw: bool = False,
         resolution: int = 512,
-        sd_version: str = None,
+        sd_version: Optional[str] = None,
         strength: str = "MEDIUM",
     ):
         """
