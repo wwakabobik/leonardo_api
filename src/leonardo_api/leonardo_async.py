@@ -268,10 +268,10 @@ class Leonardo:
                 upload_url, data=fields, headers=headers_copy.update(self.___post_headers)
             ) as response:
                 response.raise_for_status()
-                response = await response.text()
+                response_text = await response.text()
                 if self.___logger:
-                    self.___logger.debug(f"Init image {file_path} has been uploaded: {response}")
-                return response
+                    self.___logger.debug(f"Init image {file_path} has been uploaded: {response_text}")
+                return response_text
         except Exception as error:
             if self.___logger:
                 self.___logger.error(f"Error occurred while upload init image: {str(error)}")
@@ -491,14 +491,14 @@ class Leonardo:
             headers_copy = dict(self.___session.headers)
             async with self.___session.post(
                 upload_url, data=fields, headers=headers_copy.update(self.___post_headers)
-            ) as post_response:
-                post_response.raise_for_status()
-                post_response = await response.text()
+            ) as response:
+                response.raise_for_status()
+                response_text = await response.text()
                 if self.___logger:
                     self.___logger.debug(
-                        f"Dataset with dataset_id={dataset_id} uploaded using {file_path}:" f" {post_response}"
+                        f"Dataset with dataset_id={dataset_id} uploaded using {file_path}:" f" {response_text}"
                     )
-                return post_response
+                return response_text
         except Exception as error:
             if self.___logger:
                 self.___logger.error(f"Error occurred uploading dataset: {str(error)}")
@@ -581,10 +581,10 @@ class Leonardo:
                 url, json=payload, headers=headers_copy.update(self.___post_headers)
             ) as response:
                 response.raise_for_status()
-                response = await response.text()
+                post_response = await response.text()
                 if self.___logger:
-                    self.___logger.debug(f"Custom modal has been trained: {response}")
-                return response
+                    self.___logger.debug(f"Custom modal has been trained: {post_response}")
+                return post_response
         except Exception as error:
             if self.___logger:
                 self.___logger.error(f"Error training custom model: {str(error)}")
@@ -605,10 +605,10 @@ class Leonardo:
                 url, headers=headers_copy.update(self.___get_headers)
             ) as response:
                 response.raise_for_status()
-                response = await response.text()
+                response_text = await response.text()
                 if self.___logger:
-                    self.___logger.debug(f"Custom modal has been trained: {response}")
-                return response
+                    self.___logger.debug(f"Custom modal has been trained: {response_text}")
+                return response_text
         except Exception as error:
             if self.___logger:
                 self.___logger.error(f"Error obtaining custom model: {str(error)}")
@@ -629,10 +629,10 @@ class Leonardo:
                 url, headers=headers_copy.update(self.___get_headers)
             ) as response:
                 response.raise_for_status()
-                response = await response.text()
+                response_text = await response.text()
             if self.___logger:
-                self.___logger.debug(f"Custom modal has been deleted: {response}")
-            return response
+                self.___logger.debug(f"Custom modal has been deleted: {response_text}")
+            return response_text
         except Exception as error:
             if self.___logger:
                 self.___logger.error(f"Error delete custom model: {str(error)}")
