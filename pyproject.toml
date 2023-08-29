@@ -18,7 +18,11 @@ dependencies = [
     'aiofiles',
     'asyncio',
     'requests',
-    'logging'
+    'urllib3',
+    'async-timeout',
+    'certifi',
+    'charset-normalizer',
+    'frozenlist'
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -32,7 +36,11 @@ install_requires = [
     'aiofiles',
     'asyncio',
     'requests',
-    'logging'
+    'urllib3',
+    'async-timeout',
+    'certifi',
+    'charset-normalizer',
+    'frozenlist'
 ]
 
 [project.urls]
