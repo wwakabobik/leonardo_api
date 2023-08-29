@@ -83,7 +83,7 @@ jobs:
         fi
     - name: Check runner state
       run: |
-        if [[ "${{ steps.pylint.outcome }}" == "failure" || "${{ steps.black.outcome }}" == "failure" ]] || "${{ steps.mypy.outcome }}" == "failure" ]]; then
+        if [[ "${{ steps.pylint.outcome }}" == "failure" || "${{ steps.black.outcome }}" == "failure" || "${{ steps.mypy.outcome }}" == "failure" ]]; then
           echo "Linters failed, refer to related sections for info"
           exit 1
         fi
