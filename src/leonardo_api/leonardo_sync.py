@@ -439,6 +439,7 @@ class Leonardo:
         :param dataset_id: The ID of the dataset to which the image will be uploaded.
         :param file_path: The path to the image file.
         """
+        # pylint: disable=too-many-locals
         valid_extensions = ["png", "jpg", "jpeg", "webp"]
         extension = os.path.splitext(file_path)[1].strip(".")
         if extension not in valid_extensions:
@@ -543,6 +544,7 @@ class Leonardo:
         :param sd_version: The base version of stable diffusion to use if not using a custom model.
         :param strength: When training using the PIXEL_ART model type, this influences the training strength.
         """
+        # pylint: disable=too-many-locals
         url = "https://cloud.leonardo.ai/api/rest/v1/models"
         payload = {
             "name": name,
