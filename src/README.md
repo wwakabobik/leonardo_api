@@ -2,6 +2,8 @@
 
 This package contains Python API for [Leonardo.ai](https://leonardo.ai/) based on official [API documentation](https://docs.leonardo.ai/reference).
 
+![Leonardo.ai interface](https://raw.githubusercontent.com/wwakabobik/leonardo_api/master/src/assets/leonardo_interface.jpg)
+
 To install the package, please use package from [pypi](https://pypi.org/project/leonardo-api/):
 
 ```bash
@@ -26,7 +28,7 @@ Now you can use all API methods, provided by Leonardo.ai API, i.e. starting gett
                                                negative_prompt='schrodinger cat paradox',
                                                model_id='e316348f-7773-490e-adcd-46757c738eb7', width=1024, height=768,
                                                guidance_scale=7)
-``
+```
 
 In according to API reference, you will get the json answer with content about pending job like following:
 
