@@ -11,14 +11,18 @@ authors = [
 description = "Leonardo.ai Python API"
 readme = "README.md"
 license = { file="LICENSE" }
-requires-python = ">=3.7"
+requires-python = ">=3.8"
 dependencies = [
     'requests',
     'aiohttp',
     'aiofiles',
     'asyncio',
     'requests',
-    'logging'
+    'urllib3',
+    'async-timeout',
+    'certifi',
+    'charset-normalizer',
+    'frozenlist'
 ]
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -32,7 +36,11 @@ install_requires = [
     'aiofiles',
     'asyncio',
     'requests',
-    'logging'
+    'urllib3',
+    'async-timeout',
+    'certifi',
+    'charset-normalizer',
+    'frozenlist'
 ]
 
 [project.urls]
