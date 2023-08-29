@@ -31,7 +31,7 @@ class Leonardo:
     logger (logging.Logger, optional): default logger. Default will be initialized if not provided.
     """
 
-    def __init__(self, auth_token: str, logger: logging.Logger = None):
+    def __init__(self, auth_token: str, logger: Optional[logging.Logger] = None):
         """
         Constructs all the necessary attributes for the Leonardo object.
 
@@ -75,7 +75,7 @@ class Leonardo:
         guidance_scale: int = 7,
         init_generation_image_id: Optional[str] = None,
         init_image_id: Optional[str] = None,
-        init_strength: float = None,
+        init_strength: Optional[float] = None,
         scheduler: Optional[str] = None,
         preset_style: Optional[str] = None,
         tiling: bool = False,
