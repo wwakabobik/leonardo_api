@@ -5,7 +5,7 @@ Author: Iliya Vereshchagin
 Copyright (c) 2023. All rights reserved.
 
 Created: 29.08.2023
-Last Modified: 29.08.2023
+Last Modified: 30.08.2023
 
 Description:
 This file contains dicts with lists of models, split by nsfw/sfw custom models and platform models

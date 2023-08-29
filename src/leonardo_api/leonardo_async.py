@@ -5,7 +5,7 @@ Author: Iliya Vereshchagin
 Copyright (c) 2023. All rights reserved.
 
 Created: 28.08.2023
-Last Modified: 28.09.2023
+Last Modified: 30.09.2023
 
 Description:
 This file contains asynchronous implementation for Leonardo.ai API
@@ -54,9 +54,7 @@ class Leonardo:
             self.___logger.debug(f"Requesting user info: GET {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.get(
-                url, headers=headers_copy.update(self.___get_headers)
-            ) as response:
+            async with self.___session.get(url, headers=headers_copy.update(self.___get_headers)) as response:
                 response.raise_for_status()
                 response = await response.json()
                 if self.___logger:
@@ -164,9 +162,7 @@ class Leonardo:
             self.___logger.debug(f"Requested single generations: GET {url} with generation_id={generation_id}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.get(
-                url, headers=headers_copy.update(self.___get_headers)
-            ) as response:
+            async with self.___session.get(url, headers=headers_copy.update(self.___get_headers)) as response:
                 response.raise_for_status()
                 response = await response.json()
                 if self.___logger:
@@ -188,9 +184,7 @@ class Leonardo:
             self.___logger.debug(f"Delete generations with generation_id={generation_id}: DELETE {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.delete(
-                url, headers=headers_copy.update(self.___get_headers)
-            ) as response:
+            async with self.___session.delete(url, headers=headers_copy.update(self.___get_headers)) as response:
                 response.raise_for_status()
                 response = await response.json()
                 if self.___logger:
@@ -288,9 +282,7 @@ class Leonardo:
             self.___logger.debug(f"Requested single image with image_id={image_id}: GET {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.get(
-                url, headers=headers_copy.update(self.___get_headers)
-            ) as response:
+            async with self.___session.get(url, headers=headers_copy.update(self.___get_headers)) as response:
                 response.raise_for_status()
                 response = await response.json()
                 if self.___logger:
@@ -312,9 +304,7 @@ class Leonardo:
             self.___logger.debug(f"Requested to delete single image with image_id={image_id}: DELETE {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.delete(
-                url, headers=headers_copy.update(self.___get_headers)
-            ) as response:
+            async with self.___session.delete(url, headers=headers_copy.update(self.___get_headers)) as response:
                 response.raise_for_status()
                 response = await response.json()
                 if self.___logger:
@@ -361,9 +351,7 @@ class Leonardo:
             self.___logger.debug(f"Requested to obtain variation by id {generation_id}: GET {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.get(
-                url, headers=headers_copy.update(self.___get_headers)
-            ) as response:
+            async with self.___session.get(url, headers=headers_copy.update(self.___get_headers)) as response:
                 response.raise_for_status()
                 response = await response.json()
                 if self.___logger:
@@ -411,9 +399,7 @@ class Leonardo:
             self.___logger.debug(f"Requested to obtain dataset dataset_id={dataset_id}: GET {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.get(
-                url, headers=headers_copy.update(self.___get_headers)
-            ) as response:
+            async with self.___session.get(url, headers=headers_copy.update(self.___get_headers)) as response:
                 response.raise_for_status()
                 response = await response.json()
                 if self.___logger:
@@ -435,9 +421,7 @@ class Leonardo:
             self.___logger.debug(f"Requested to delete dataset dataset_id={dataset_id}: DELETE {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.delete(
-                url, headers=headers_copy.update(self.___get_headers)
-            ) as response:
+            async with self.___session.delete(url, headers=headers_copy.update(self.___get_headers)) as response:
                 response.raise_for_status()
                 response = await response.json()
                 if self.___logger:
@@ -561,6 +545,7 @@ class Leonardo:
         :param sd_version: The base version of stable diffusion to use if not using a custom model.
         :param strength: When training using the PIXEL_ART model type, this influences the training strength.
         """
+        # pylint: disable=too-many-locals
         url = "https://cloud.leonardo.ai/api/rest/v1/models"
         payload = {
             "name": name,
@@ -601,9 +586,7 @@ class Leonardo:
             self.___logger.debug(f"Requested to obtain custom model by model_id={model_id}: GET {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.get(
-                url, headers=headers_copy.update(self.___get_headers)
-            ) as response:
+            async with self.___session.get(url, headers=headers_copy.update(self.___get_headers)) as response:
                 response.raise_for_status()
                 response_text = await response.text()
                 if self.___logger:
@@ -625,9 +608,7 @@ class Leonardo:
             self.___logger.debug(f"Requested to delete custom model by model_id={model_id}: GET {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.delete(
-                url, headers=headers_copy.update(self.___get_headers)
-            ) as response:
+            async with self.___session.delete(url, headers=headers_copy.update(self.___get_headers)) as response:
                 response.raise_for_status()
                 response_text = await response.text()
             if self.___logger:
