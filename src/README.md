@@ -44,7 +44,7 @@ To obtain your image you need to use additional method:
 Or, optionally, you may wait for job completion using following method:
 
 ```python
-    response = await leonardo.wait_for_image_generation(generation_id=response['sdGenerationJob']['generationId'])
+    response = leonardo.wait_for_image_generation(generation_id=response['sdGenerationJob']['generationId'])
 ```
 
 Finally, you'll get your array of images:
