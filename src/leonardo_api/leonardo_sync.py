@@ -624,7 +624,7 @@ class Leonardo:
 
             time.sleep(poll_interval)
 
-            if timeout_counter >= timeout / poll_interval:
+            if timeout_counter >= (timeout / poll_interval):
                 raise TimeoutError(f"Image has not been generated in {timeout} seconds")
             else:
                 timeout_counter += 1
