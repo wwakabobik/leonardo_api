@@ -1,7 +1,3 @@
-# Leonardo_api
-
-pypi package can be found [here](https://pypi.org/project/leonardo_api/).
-
 ## This is Leonardo.ai API.
 
 This package contains Python API for [Leonardo.ai](https://leonardo.ai/) based on official [API documentation](https://docs.leonardo.ai/reference).
