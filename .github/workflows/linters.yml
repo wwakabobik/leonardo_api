@@ -1,0 +1,88 @@
+name: Linters
+
+on:
+  push:
+    branches-ignore:
+      - 'master'
+  pull_request:
+    branches-ignore:
+      - 'master'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.8", "3.9", "3.10", "3.11.4"]
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v3
+      with:
+        python-version: ${{ matrix.python-version }}
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pylint reorder-python-imports
+        pip install mypy reorder-python-imports
+        pip install wemake-python-styleguide reorder-python-imports
+        pip install black reorder-python-imports
+
+    - name: Analysing the code with pylint
+      id: pylint
+      continue-on-error: true
+      run: |
+        changed_files=$(git diff --diff-filter=d --name-only $(git merge-base HEAD origin/master) HEAD | grep '\.py$') || true
+        echo $changed_files
+        if [ -n "$changed_files" ]; then
+            PYTHONPATH=. pylint $changed_files
+        else
+            echo "No files changed, passing by"
+            exit 0
+        fi
+    - name: Analysing the code with mypy
+      id: mypy
+      continue-on-error: true
+      run: |
+        changed_files=$(git diff --diff-filter=d --name-only $(git merge-base HEAD origin/master) HEAD | grep '\.py$') || true
+        echo $changed_files
+        if [ -n "$changed_files" ]; then
+            PYTHONPATH=. mypy $changed_files
+        else
+            echo "No files changed, passing by"
+            exit 0
+        fi
+    - name: Check code with flake8
+      id: flake8
+      continue-on-error: true
+      run: |
+        changed_files=$(git diff --diff-filter=d --name-only $(git merge-base HEAD origin/master) HEAD | grep '\.py$') || true
+        echo $changed_files
+        if [ -n "$changed_files" ]; then
+          PYTHONPATH=. flake8 $changed_files
+        else
+          echo "No files changed, passing by"
+          exit 0
+        fi
+    - name: Check code with Black
+      id: black
+      continue-on-error: true
+      run: |
+        changed_files=$(git diff --diff-filter=d --name-only $(git merge-base HEAD origin/master) HEAD | grep '\.py$') || true
+        echo $changed_files
+        if [ -n "$changed_files" ]; then
+            PYTHONPATH=. black --diff --check --color $changed_files
+        else
+            echo "No files changed, passing by"
+            exit 0
+        fi
+    - name: Check runner state
+      run: |
+        if [[ "${{ steps.pylint.outcome }}" == "failure" || "${{ steps.black.outcome }}" == "failure" ]] || "${{ steps.mypy.outcome }}" == "failure" ]]; then
+          echo "Linters failed, refer to related sections for info"
+          exit 1
+        fi

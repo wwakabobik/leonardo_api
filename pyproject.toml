@@ -1,0 +1,74 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "leonardo_api"
+version = "0.0.1"
+authors = [
+  { name="Iliya Vereshchagin", email="i.vereshchagin@gmail.com" },
+]
+description = "Leonardo.ai Python API"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.7"
+dependencies = [
+    'requests',
+    'aiohttp',
+    'aiofiles',
+    'asyncio',
+    'requests',
+    'logging'
+]
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+install_requires = [
+    'requests',
+    'aiohttp',
+    'aiofiles',
+    'asyncio',
+    'requests',
+    'logging'
+]
+
+[project.urls]
+"Homepage" = "https://github.com/wwakabobik/leonardo_api"
+"Bug Tracker" = "https://github.com/wwakabobik/leonardo_api/issues"
+
+[tool.black]
+line-length = 120
+
+[tool.flake8]
+max-line-length = 120
+extend-ignore = """
+    Q000,
+    WPS306,
+    I001,
+    I005,
+    WPS229,
+    D400,
+    WPS317,
+    S101,
+    WPS507,
+    DAR101,
+    DAR201,
+    WPS112,
+    F401,
+    WPS300,
+    WPS412,
+    DAR301,
+    D401,
+    D205,
+    WPS615,
+    I004,
+    WPS110,
+    WPS420,
+    C812
+"""
+
+[tool.pylint]
+max-line-length = 120

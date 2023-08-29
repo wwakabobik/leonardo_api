@@ -1,0 +1,5 @@
+aiohttp==3.8.5
+aiofiles==23.2.1
+asyncio==3.4.3
+requests==2.31.0
+logging==0.4.9.6
