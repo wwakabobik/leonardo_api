@@ -53,7 +53,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requesting user info: GET {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.get(
                 url, headers=headers_copy.update(self.___get_headers)
             ) as response:
@@ -139,7 +139,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requesting post generations: POST {url} with payload: {payload}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.post(
                 url, json=payload, headers=headers_copy.update(self.___post_headers)
             ) as response:
@@ -163,7 +163,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requested single generations: GET {url} with generation_id={generation_id}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.get(
                 url, headers=headers_copy.update(self.___get_headers)
             ) as response:
@@ -187,7 +187,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Delete generations with generation_id={generation_id}: DELETE {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.delete(
                 url, headers=headers_copy.update(self.___get_headers)
             ) as response:
@@ -214,7 +214,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requested generations for {user_id} with params {params}: GET {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.get(
                 url, params=params, headers=headers_copy.update(self.___get_headers)
             ) as response:
@@ -244,7 +244,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Init image {file_path} upload requested with payload = {payload}: POST {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.post(
                 url, json=payload, headers=headers_copy.update(self.___post_headers)
             ) as response:
@@ -263,7 +263,7 @@ class Leonardo:
 
             if self.___logger:
                 self.___logger.debug(f"Init image {file_path} uploading with as binary: POST {upload_url}")
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.post(
                 upload_url, data=fields, headers=headers_copy.update(self.___post_headers)
             ) as response:
@@ -287,7 +287,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requested single image with image_id={image_id}: GET {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.get(
                 url, headers=headers_copy.update(self.___get_headers)
             ) as response:
@@ -311,7 +311,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requested to delete single image with image_id={image_id}: DELETE {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.delete(
                 url, headers=headers_copy.update(self.___get_headers)
             ) as response:
@@ -336,7 +336,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requested to upscale image with payload {payload}: POST {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.post(
                 url, json=payload, headers=headers_copy.update(self.___post_headers)
             ) as response:
@@ -360,7 +360,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requested to obtain variation by id {generation_id}: GET {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.get(
                 url, headers=headers_copy.update(self.___get_headers)
             ) as response:
@@ -386,7 +386,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requested to create dataset with payload {payload}: POST {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.post(
                 url, json=payload, headers=headers_copy.update(self.___post_headers)
             ) as response:
@@ -410,7 +410,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requested to obtain dataset dataset_id={dataset_id}: GET {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.get(
                 url, headers=headers_copy.update(self.___get_headers)
             ) as response:
@@ -434,7 +434,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requested to delete dataset dataset_id={dataset_id}: DELETE {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.delete(
                 url, headers=headers_copy.update(self.___get_headers)
             ) as response:
@@ -467,7 +467,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requested to upload dataset_id={dataset_id} from {file_path}: POST {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.post(
                 url, json=payload, headers=headers_copy.update(self.___post_headers)
             ) as response:
@@ -488,7 +488,7 @@ class Leonardo:
 
             if self.___logger:
                 self.___logger.debug(f"Uploading dataset_id={dataset_id} from {file_path}: POST {url}")
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.post(
                 upload_url, data=fields, headers=headers_copy.update(self.___post_headers)
             ) as post_response:
@@ -519,7 +519,7 @@ class Leonardo:
                 f"to dataset_id={dataset_id}: POST {url}"
             )
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.post(
                 url, json=payload, headers=headers_copy.update(self.___post_headers)
             ) as response:
@@ -576,7 +576,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requested to train custom model with payload {payload}: POST {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.post(
                 url, json=payload, headers=headers_copy.update(self.___post_headers)
             ) as response:
@@ -600,7 +600,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requested to obtain custom model by model_id={model_id}: GET {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.get(
                 url, headers=headers_copy.update(self.___get_headers)
             ) as response:
@@ -624,7 +624,7 @@ class Leonardo:
         if self.___logger:
             self.___logger.debug(f"Requested to delete custom model by model_id={model_id}: GET {url}")
         try:
-            headers_copy = self.___session.headers.copy()
+            headers_copy = dict(self.___session.headers)
             async with self.___session.delete(
                 url, headers=headers_copy.update(self.___get_headers)
             ) as response:
