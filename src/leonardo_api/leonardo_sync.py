@@ -70,8 +70,8 @@ class Leonardo:
         num_images: int = 4,
         width: int = 512,
         height: int = 512,
-        num_inference_steps: int = None,
-        guidance_scale: int = None,
+        num_inference_steps: int = 40,
+        guidance_scale: int = 7,
         init_generation_image_id: str = None,
         init_image_id: str = None,
         init_strength: float = None,
@@ -80,7 +80,7 @@ class Leonardo:
         tiling: bool = False,
         public: bool = False,
         prompt_magic: bool = True,
-        control_net: bool = None,
+        control_net: bool = False,
         control_net_type: str = None,
     ):
         """
@@ -93,8 +93,8 @@ class Leonardo:
         :param num_images: The number of images to generate. Default is 4.
         :param width: The width of the images. Default is 512px.
         :param height: The height of the images. Default is 512px.
-        :param num_inference_steps: The number of inference steps to use for the generation.
-        :param guidance_scale: How strongly the generation should reflect the prompt.
+        :param num_inference_steps: The number of inference steps for generation. Must be from 40 to 60. Default is 40.
+        :param guidance_scale: How strongly the generation should reflect the prompt. Number from 1 to 20. Default is 7.
         :param init_generation_image_id: The ID of an existing image to use in image2image.
         :param init_image_id: The ID of an Init Image to use in image2image.
         :param init_strength: How strongly the generated images should reflect the original image in image2image.
@@ -104,7 +104,7 @@ class Leonardo:
         :param public: Whether the generated images should show in the community feed. Default is False.
         :param prompt_magic: Enable to use Prompt Magic. Default is True.
         :param control_net: Enable to use ControlNet. Requires an init image to be provided.
-                            Requires a model based on SD v1.5
+                            Requires a model based on SD v1.5. Default is False.
         :param control_net_type: The type of ControlNet to use.
         """
         # pylint: disable=too-many-locals
