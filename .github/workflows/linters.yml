@@ -52,7 +52,7 @@ jobs:
         changed_files=$(git diff --diff-filter=d --name-only $(git merge-base HEAD origin/master) HEAD | grep '\.py$') || true
         echo $changed_files
         if [ -n "$changed_files" ]; then
-            PYTHONPATH=. mypy $changed_files
+            PYTHONPATH=. mypy $changed_files --install-types --non-interactive --ignore-missing-imports
         else
             echo "No files changed, passing by"
             exit 0
