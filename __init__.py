@@ -11,6 +11,6 @@ Description:
 This file contains module init
 """
 from .src.leonardo_api.leonardo_async import Leonardo as LeonardoAsync  # pylint: disable=unused-import
-from .src.leonardo_api.leonardo_sync import Leonardo as Leonardo  # pylint: disable=unused-import
+from .src.leonardo_api.leonardo_sync import Leonardo  # pylint: disable=unused-import
 from .src.leonardo_api.models import platform_models, custom_models, nsfw_models  # pylint: disable=unused-import
 from .src.leonardo_api.logger_config import setup_logger  # pylint: disable=unused-import
