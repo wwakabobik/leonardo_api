@@ -1,5 +1,7 @@
 ## This is Leonardo.ai API.
 
+[![PyPI version](https://badge.fury.io/py/leonardo-api.svg)](https://badge.fury.io/py/leonardo-api) [![Linters](https://github.com/wwakabobik/leonardo_api/actions/workflows/master-linters.yml/badge.svg?branch=master)](https://github.com/wwakabobik/leonardo_api/actions/workflows/master-linters.yml)
+
 This package contains Python API for [Leonardo.ai](https://leonardo.ai/) based on official [API documentation](https://docs.leonardo.ai/reference).
 
 ![Leonardo.ai interface](https://raw.githubusercontent.com/wwakabobik/leonardo_api/master/src/assets/leonardo_interface.jpg)

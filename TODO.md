@@ -1,1 +1,0 @@
-- Get rid of 'no_implicit_optional = False' mypy stub
