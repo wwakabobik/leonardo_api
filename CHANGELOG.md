@@ -34,3 +34,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - Fixed linters warnings
 - README.md
+
+## [0.0.6] - 2023-10-14
+
+### Changed
+- Updated metadata
+
+## [0.0.7] - 2023-10-15
+
+### Changed
+- Updated metafata
+- Updated GitHub workflows
