@@ -8,6 +8,10 @@ version = "0.0.6"
 authors = [
   { name="Iliya Vereshchagin", email="i.vereshchagin@gmail.com" },
 ]
+maintainers = [
+  { name="Iliya Vereshchagin", email="i.vereshchagin@gmail.com" },
+]
+keywords = ["leonardo", "ai", "image generation", "artificial intelligence", "api", "llm", "leonardo.ai", "stablediffusion"]
 description = "Leonardo.ai Python API"
 readme = "README.md"
 license = { file="LICENSE" }
@@ -31,6 +35,12 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Information Technology",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+    "Topic :: Scientific/Engineering :: Image Processing",
+    "Topic :: Scientific/Engineering :: Visualization",
 ]
 
 install_requires = [
