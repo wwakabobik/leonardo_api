@@ -10,7 +10,7 @@ Last Modified: 29.09.2023
 Description:
 This file contains module main init
 """
-from leonardo_api.leonardo_async import Leonardo as LeonardoAsync
-from leonardo_api.leonardo_sync import Leonardo as Leonardo
-from leonardo_api.models import platform_models, custom_models, nsfw_models
-from leonardo_api.logger_config import setup_logger
+from .leonardo_api.leonardo_async import Leonardo as LeonardoAsync  # pylint: disable=unused-import
+from .leonardo_api.leonardo_sync import Leonardo as Leonardo  # pylint: disable=unused-import
+from .leonardo_api.models import platform_models, custom_models, nsfw_models  # pylint: disable=unused-import
+from .leonardo_api.logger_config import setup_logger  # pylint: disable=unused-import

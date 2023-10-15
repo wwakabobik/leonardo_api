@@ -1,4 +1,4 @@
-name: Linters
+name: Linters-PR
 
 on:
   push:
@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python-version: ["3.8", "3.9", "3.10", "3.11.4"]
+        python-version: ["3.8", "3.9", "3.10", "3.11"]
     steps:
     - name: Checkout
       uses: actions/checkout@v3
