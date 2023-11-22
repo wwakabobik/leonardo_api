@@ -558,13 +558,12 @@ class Leonardo:
             self.___logger.error(f"Error delete custom model: {str(error)}")
             raise
 
-    async def wait_for_image_generation(self, generation_id, image_index=None, poll_interval=5, timeout=120):
+    async def wait_for_image_generation(self, generation_id, image_index=0, poll_interval=5, timeout=120):
         """
         This method waits for the completion of image generation.
 
         :param generation_id: The ID of the generation to check.
-        :param image_index: (Optional) The index of the specific image to wait for.
-                                       If None, waits for all images to complete.
+        :param image_index: (Optional) The index of the specific image to wait for. Default is 0.
         :param poll_interval: (Optional) The time interval in seconds between each check. Default is 5 seconds.
         :param timeout: (Optional) Waiting timeout. Default is 120 seconds.
 
@@ -581,7 +580,7 @@ class Leonardo:
             if status == "COMPLETE":
                 images = generation.get("generated_images", [])
                 if image_index is not None:
-                    if image_index >= len(images):
+                    if len(images) <= image_index < 0:
                         raise IndexError("Incorrect image index")
                     return images[image_index]
 
