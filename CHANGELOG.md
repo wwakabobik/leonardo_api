@@ -52,3 +52,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fixed wait_for_image_generation method (default is 0 now)
 - Updated GitHub workflows (Python 3.12 added for linters)
 - Bumped requirements
+
+## [0.0.9] - 2023-11-23
+
+### Fixed
+- Fixed headers update methods (possible async bug fix)
