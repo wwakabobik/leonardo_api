@@ -54,7 +54,8 @@ class Leonardo:
         self.___logger.debug(f"Requesting user info: GET {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.get(url, headers=headers_copy.update(self.___get_headers)) as response:
+            headers_copy.update(self.___get_headers)
+            async with self.___session.get(url, headers=headers_copy) as response:
                 response.raise_for_status()
                 response = await response.json()
                 self.___logger.debug(f"User info: {response}")
@@ -135,9 +136,8 @@ class Leonardo:
         self.___logger.debug(f"Requesting post generations: POST {url} with payload: {payload}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.post(
-                url, json=payload, headers=headers_copy.update(self.___post_headers)
-            ) as response:
+            headers_copy.update(self.___post_headers)
+            async with self.___session.post(url, json=payload, headers=headers_copy) as response:
                 response.raise_for_status()
                 response = await response.json()
                 self.___logger.debug(f"Post generations: {response}")
@@ -156,7 +156,8 @@ class Leonardo:
         self.___logger.debug(f"Requested single generations: GET {url} with generation_id={generation_id}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.get(url, headers=headers_copy.update(self.___get_headers)) as response:
+            headers_copy.update(self.___get_headers)
+            async with self.___session.get(url, headers=headers_copy) as response:
                 response.raise_for_status()
                 response = await response.json()
                 self.___logger.debug(f"Single generations: {response}")
@@ -175,7 +176,8 @@ class Leonardo:
         self.___logger.debug(f"Delete generations with generation_id={generation_id}: DELETE {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.delete(url, headers=headers_copy.update(self.___get_headers)) as response:
+            headers_copy.update(self.___get_headers)
+            async with self.___session.delete(url, headers=headers_copy) as response:
                 response.raise_for_status()
                 response = await response.json()
                 self.___logger.debug(f"Generations {generation_id} has been deleted: {response}")
@@ -197,9 +199,8 @@ class Leonardo:
         self.___logger.debug(f"Requested generations for {user_id} with params {params}: GET {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.get(
-                url, params=params, headers=headers_copy.update(self.___get_headers)
-            ) as response:
+            headers_copy.update(self.___get_headers)
+            async with self.___session.get(url, params=params, headers=headers_copy) as response:
                 response.raise_for_status()
                 response = await response.json()
                 self.___logger.debug(f"Generations for user {user_id} are: {response}")
@@ -210,7 +211,7 @@ class Leonardo:
 
     async def upload_init_image(self, file_path: str):
         """
-        This endpoint returns presigned details to upload an init image to S3.
+        This endpoint returns pre-signed details to upload an init image to S3.
 
         :param file_path: The path to the image file.
         """
@@ -224,9 +225,8 @@ class Leonardo:
         self.___logger.debug(f"Init image {file_path} upload requested with payload = {payload}: POST {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.post(
-                url, json=payload, headers=headers_copy.update(self.___post_headers)
-            ) as response:
+            headers_copy.update(self.___post_headers)
+            async with self.___session.post(url, json=payload, headers=headers_copy) as response:
                 response.raise_for_status()
                 data = await response.json()
             self.___logger.debug(f"Init image {file_path} initiated: {data}")
@@ -239,9 +239,8 @@ class Leonardo:
             fields.update({"file": file_data})
             self.___logger.debug(f"Init image {file_path} uploading with as binary: POST {upload_url}")
             headers_copy = dict(self.___session.headers)
-            async with self.___session.post(
-                upload_url, data=fields, headers=headers_copy.update(self.___post_headers)
-            ) as response:
+            headers_copy.update(self.___post_headers)
+            async with self.___session.post(upload_url, data=fields, headers=headers_copy) as response:
                 response.raise_for_status()
                 response_text = await response.text()
                 self.___logger.debug(f"Init image {file_path} has been uploaded: {response_text}")
@@ -260,7 +259,8 @@ class Leonardo:
         self.___logger.debug(f"Requested single image with image_id={image_id}: GET {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.get(url, headers=headers_copy.update(self.___get_headers)) as response:
+            headers_copy.update(self.___get_headers)
+            async with self.___session.get(url, headers=headers_copy) as response:
                 response.raise_for_status()
                 response = await response.json()
                 self.___logger.debug(f"Single image provided: {response}")
@@ -279,7 +279,8 @@ class Leonardo:
         self.___logger.debug(f"Requested to delete single image with image_id={image_id}: DELETE {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.delete(url, headers=headers_copy.update(self.___get_headers)) as response:
+            headers_copy.update(self.___get_headers)
+            async with self.___session.delete(url, headers=headers_copy) as response:
                 response.raise_for_status()
                 response = await response.json()
                 self.___logger.debug(f"Single image deleted: {response}")
@@ -299,15 +300,14 @@ class Leonardo:
         self.___logger.debug(f"Requested to upscale image with payload {payload}: POST {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.post(
-                url, json=payload, headers=headers_copy.update(self.___post_headers)
-            ) as response:
+            headers_copy.update(self.___post_headers)
+            async with self.___session.post(url, json=payload, headers=headers_copy) as response:
                 response.raise_for_status()
                 response = await response.json()
                 self.___logger.debug(f"Upscale created: {response}")
                 return response
         except Exception as error:
-            self.___logger.error(f"Error occurred while upscaling image: {str(error)}")
+            self.___logger.error(f"Error occurred while up-scaling image: {str(error)}")
             raise
 
     async def get_variation_by_id(self, generation_id: str):
@@ -320,7 +320,8 @@ class Leonardo:
         self.___logger.debug(f"Requested to obtain variation by id {generation_id}: GET {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.get(url, headers=headers_copy.update(self.___get_headers)) as response:
+            headers_copy.update(self.___get_headers)
+            async with self.___session.get(url, headers=headers_copy) as response:
                 response.raise_for_status()
                 response = await response.json()
                 self.___logger.debug(f"Get variation by ID: {response}")
@@ -341,9 +342,8 @@ class Leonardo:
         self.___logger.debug(f"Requested to create dataset with payload {payload}: POST {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.post(
-                url, json=payload, headers=headers_copy.update(self.___post_headers)
-            ) as response:
+            headers_copy.update(self.___post_headers)
+            async with self.___session.post(url, json=payload, headers=headers_copy) as response:
                 response.raise_for_status()
                 response = await response.json()
                 self.___logger.debug(f"Dataset has been created: {response}")
@@ -381,7 +381,8 @@ class Leonardo:
         self.___logger.debug(f"Requested to delete dataset dataset_id={dataset_id}: DELETE {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.delete(url, headers=headers_copy.update(self.___get_headers)) as response:
+            headers_copy.update(self.___get_headers)
+            async with self.___session.delete(url, headers=headers_copy) as response:
                 response.raise_for_status()
                 response = await response.json()
                 self.___logger.debug(f"Dataset with dataset_id={dataset_id} has been deleted: {response}")
@@ -392,7 +393,7 @@ class Leonardo:
 
     async def upload_dataset_image(self, dataset_id: str, file_path: str):
         """
-        This endpoint returns presigned details to upload a dataset image to S3.
+        This endpoint returns pre-signed details to upload a dataset image to S3.
 
         :param dataset_id: The ID of the dataset to which the image will be uploaded.
         :param file_path: The path to the image file.
@@ -409,9 +410,8 @@ class Leonardo:
         self.___logger.debug(f"Requested to upload dataset_id={dataset_id} from {file_path}: POST {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.post(
-                url, json=payload, headers=headers_copy.update(self.___post_headers)
-            ) as response:
+            headers_copy.update(self.___post_headers)
+            async with self.___session.post(url, json=payload, headers=headers_copy) as response:
                 response.raise_for_status()
                 data = await response.json()
             self.___logger.debug(
@@ -426,9 +426,8 @@ class Leonardo:
             fields.update({"file": file_data})
             self.___logger.debug(f"Uploading dataset_id={dataset_id} from {file_path}: POST {url}")
             headers_copy = dict(self.___session.headers)
-            async with self.___session.post(
-                upload_url, data=fields, headers=headers_copy.update(self.___post_headers)
-            ) as response:
+            headers_copy.update(self.___post_headers)
+            async with self.___session.post(upload_url, data=fields, headers=headers_copy) as response:
                 response.raise_for_status()
                 response_text = await response.text()
                 self.___logger.debug(
@@ -453,9 +452,8 @@ class Leonardo:
         )
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.post(
-                url, json=payload, headers=headers_copy.update(self.___post_headers)
-            ) as response:
+            headers_copy.update(self.___post_headers)
+            async with self.___session.post(url, json=payload, headers=headers_copy) as response:
                 response.raise_for_status()
                 response = await response.json()
                 self.___logger.debug(
@@ -487,7 +485,7 @@ class Leonardo:
         :param dataset_id: The ID of the dataset to train the model on.
         :param instance_prompt: The instance prompt to use during training.
         :param model_type: The category the most accurately reflects the model.
-        :param nsfw: whether or not the model is NSFW.
+        :param nsfw: mark for NSFW model. Default is False.
         :param resolution: The resolution for training. Must be 512 or 768.
         :param sd_version: The base version of stable diffusion to use if not using a custom model.
         :param strength: When training using the PIXEL_ART model type, this influences the training strength.
@@ -508,9 +506,8 @@ class Leonardo:
         self.___logger.debug(f"Requested to train custom model with payload {payload}: POST {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.post(
-                url, json=payload, headers=headers_copy.update(self.___post_headers)
-            ) as response:
+            headers_copy.update(self.___post_headers)
+            async with self.___session.post(url, json=payload, headers=headers_copy) as response:
                 response.raise_for_status()
                 post_response = await response.text()
                 self.___logger.debug(f"Custom modal has been trained: {post_response}")
@@ -529,7 +526,8 @@ class Leonardo:
         self.___logger.debug(f"Requested to obtain custom model by model_id={model_id}: GET {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.get(url, headers=headers_copy.update(self.___get_headers)) as response:
+            headers_copy.update(self.___get_headers)
+            async with self.___session.get(url, headers=headers_copy) as response:
                 response.raise_for_status()
                 response_text = await response.text()
                 self.___logger.debug(f"Custom modal has been trained: {response_text}")
@@ -548,7 +546,8 @@ class Leonardo:
         self.___logger.debug(f"Requested to delete custom model by model_id={model_id}: GET {url}")
         try:
             headers_copy = dict(self.___session.headers)
-            async with self.___session.delete(url, headers=headers_copy.update(self.___get_headers)) as response:
+            headers_copy.update(self.___get_headers)
+            async with self.___session.delete(url, headers=headers_copy) as response:
                 response.raise_for_status()
                 response_text = await response.text()
 
