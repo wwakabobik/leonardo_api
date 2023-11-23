@@ -210,7 +210,7 @@ class Leonardo:
 
     def upload_init_image(self, file_path: str):
         """
-        This endpoint returns presigned details to upload an init image to S3.
+        This endpoint returns pre-signed details to upload an init image to S3.
 
         :param file_path: The path to the image file.
         """
@@ -308,7 +308,7 @@ class Leonardo:
             self.___logger.debug(f"Upscale created: {response}")
             return response
         except Exception as error:
-            self.___logger.error(f"Error occurred while upscaling image: {str(error)}")
+            self.___logger.error(f"Error occurred while up-scaling image: {str(error)}")
             raise
 
     def get_variation_by_id(self, generation_id: str):
@@ -395,7 +395,7 @@ class Leonardo:
 
     def upload_dataset_image(self, dataset_id: str, file_path: str):
         """
-        This endpoint returns presigned details to upload a dataset image to S3.
+        This endpoint returns pre-signed details to upload a dataset image to S3.
 
         :param dataset_id: The ID of the dataset to which the image will be uploaded.
         :param file_path: The path to the image file.
@@ -488,7 +488,7 @@ class Leonardo:
         :param dataset_id: The ID of the dataset to train the model on.
         :param instance_prompt: The instance prompt to use during training.
         :param model_type: The category the most accurately reflects the model.
-        :param nsfw: whether or not the model is NSFW.
+        :param nsfw: mark for NSFW model. Default is False.
         :param resolution: The resolution for training. Must be 512 or 768.
         :param sd_version: The base version of stable diffusion to use if not using a custom model.
         :param strength: When training using the PIXEL_ART model type, this influences the training strength.
