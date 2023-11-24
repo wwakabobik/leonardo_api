@@ -57,3 +57,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fixed headers update methods (possible async bug fix)
+
+## [0.0.10] - 2023-11-24
+
+### Fixed
+- Fixed image upload methods (headers should be purged before poking s3)
+- Fixed session headers update to much more generic
