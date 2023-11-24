@@ -17,9 +17,9 @@ import mimetypes
 import os
 from typing import Optional
 
+import asyncio
 import aiofiles
 import aiohttp
-import asyncio
 
 from .logger_config import setup_logger
 
@@ -286,7 +286,7 @@ class Leonardo:
                 await session.close()
             raise error
 
-    async def upload_init_image(self, file_path: str):
+    async def upload_init_image(self, file_path: str):  # pylint: disable=too-many-locals
         """
         This endpoint returns pre-signed details to upload an init image to S3.
 
