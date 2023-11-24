@@ -535,9 +535,7 @@ class Leonardo:
                 fields.update({"file": file_data})
                 response = session.post(upload_url, data=fields)
                 response.raise_for_status()
-                self.___logger.debug(
-                    f"Dataset with dataset_id={dataset_id} uploaded using {file_path}"
-                )
+                self.___logger.debug(f"Dataset with dataset_id={dataset_id} uploaded using {file_path}")
                 session.close()
                 return response
         except Exception as error:
@@ -688,7 +686,7 @@ class Leonardo:
             raise error
 
     def wait_for_image_generation(
-            self, generation_id: str, image_index: int = 0, poll_interval: int = 5, timeout: int = 120
+        self, generation_id: str, image_index: int = 0, poll_interval: int = 5, timeout: int = 120
     ) -> requests.Response:
         """
         This method waits for the completion of image generation.
