@@ -83,10 +83,10 @@ class Leonardo:
         try:
             async with session.get(url) as response:
                 response.raise_for_status()
-                response = await response.json()
-                self.___logger.debug(f"User info: {response}")
+                response_dict = await response.json()
+                self.___logger.debug(f"User info: {response_dict}")
                 await session.close()
-                return response
+                return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while getting user info: {str(error)}")
             if not session.closed:
@@ -114,7 +114,7 @@ class Leonardo:
         prompt_magic: bool = True,
         control_net: bool = False,
         control_net_type: Optional[str] = None,
-    ) -> str:
+    ) -> dict:
         """
         This endpoint will generate images.
 
@@ -158,7 +158,7 @@ class Leonardo:
         :param control_net_type: The type of ControlNet to use.
         :type control_net_type: str, optional
         :return: generation response
-        :rtype: str
+        :rtype: dict
 
         Raises:
             Exception: if error occurred while post generations
@@ -191,10 +191,10 @@ class Leonardo:
         try:
             async with session.post(url, json=payload) as response:
                 response.raise_for_status()
-                response = await response.json()
-                self.___logger.debug(f"Post generations: {response}")
+                response_dict = await response.json()
+                self.___logger.debug(f"Post generations: {response_dict}")
                 await session.close()
-                return response
+                return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while post generations: {str(error)}")
             if not session.closed:
@@ -219,10 +219,10 @@ class Leonardo:
         try:
             async with session.get(url) as response:
                 response.raise_for_status()
-                response = await response.json()
+                response_dict = await response.json()
                 self.___logger.debug(f"Single generations: {response}")
                 await session.close()
-                return response
+                return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while get single generations: {str(error)}")
             if not session.closed:
@@ -279,10 +279,10 @@ class Leonardo:
         try:
             async with session.get(url, params=params) as response:
                 response.raise_for_status()
-                response = await response.json()
-                self.___logger.debug(f"Generations for user {user_id} are: {response}")
+                response_dict = await response.json()
+                self.___logger.debug(f"Generations for user {user_id} are: {response_dict}")
                 await session.close()
-                return response
+                return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while obtaining user's generations: {str(error)}")
             if not session.closed:
@@ -358,10 +358,10 @@ class Leonardo:
         try:
             async with session.get(url) as response:
                 response.raise_for_status()
-                response = await response.json()
-                self.___logger.debug(f"Single image provided: {response}")
+                response_dict = await response.json()
+                self.___logger.debug(f"Single image provided: {response_dict}")
                 await session.close()
-                return response
+                return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while obtain single init image: {str(error)}")
             if not session.closed:
@@ -395,7 +395,7 @@ class Leonardo:
                 await session.close()
             raise error
 
-    async def create_upscale(self, image_id: str) -> dict:
+    async def create_upscale(self, image_id: str) -> aiohttp.ClientResponse:
         """
         This endpoint will create an upscale for the provided image ID.
 
@@ -414,10 +414,10 @@ class Leonardo:
         try:
             async with session.post(url, json=payload) as response:
                 response.raise_for_status()
-                response = await response.json()
-                self.___logger.debug(f"Upscale created: {response}")
+                response_dict = await response.json()
+                self.___logger.debug(f"Upscale created: {response_dict}")
                 await session.close()
-                return response
+                return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while up-scaling image: {str(error)}")
             if not session.closed:
@@ -442,10 +442,10 @@ class Leonardo:
         try:
             async with session.get(url) as response:
                 response.raise_for_status()
-                response = await response.json()
-                self.___logger.debug(f"Get variation by ID: {response}")
+                response_dict = await response.json()
+                self.___logger.debug(f"Get variation by ID: {response_dict}")
                 await session.close()
-                return response
+                return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while get variation by id: {str(error)}")
             if not session.closed:
@@ -500,10 +500,10 @@ class Leonardo:
         try:
             async with session.get(url) as response:
                 response.raise_for_status()
-                response = await response.json()
-                self.___logger.debug(f"Dataset with dataset_id={dataset_id} provided: {response}")
+                response_dict = await response.json()
+                self.___logger.debug(f"Dataset with dataset_id={dataset_id} provided: {response_dict}")
                 await session.close()
-                return response
+                return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while get dataset: {str(error)}")
             if not session.closed:
@@ -714,10 +714,10 @@ class Leonardo:
         try:
             async with session.get(url) as response:
                 response.raise_for_status()
-                response = await response.json()
-                self.___logger.debug(f"Custom modal has been trained: {response}")
+                response_dict = await response.json()
+                self.___logger.debug(f"Custom modal has been trained: {response_dict}")
                 await session.close()
-                return response
+                return response_dict
         except Exception as error:
             self.___logger.error(f"Error obtaining custom model: {str(error)}")
             if not session.closed:
@@ -753,7 +753,7 @@ class Leonardo:
 
     async def wait_for_image_generation(
         self, generation_id: str, image_index: int = 0, poll_interval: int = 5, timeout: int = 120
-    ) -> dict:
+    ) -> aiohttp.ClientResponse:
         """
         This method waits for the completion of image generation.
 
@@ -766,7 +766,7 @@ class Leonardo:
         :param timeout: (Optional) Waiting timeout. Default is 120 seconds.
         :type timeout: int, optional
         :return: The completed image(s) once generation is complete.
-        :rtype: dict
+        :rtype: aiohttp.ClientResponse
         :raises IndexError: If an invalid image_index is provided.
         :raises TimeoutError: If the image has not been generated in timeout seconds.
 

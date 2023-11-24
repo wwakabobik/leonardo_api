@@ -82,10 +82,10 @@ class Leonardo:
         try:
             response = session.get(url)
             response.raise_for_status()
-            response = response.json()
-            self.___logger.debug(f"User info: {response}")
+            response_dict = response.json()
+            self.___logger.debug(f"User info: {response_dict}")
             session.close()
-            return response
+            return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while getting user info: {str(error)}")
             raise error
@@ -111,7 +111,7 @@ class Leonardo:
         prompt_magic: bool = True,
         control_net: bool = False,
         control_net_type: Optional[str] = None,
-    ) -> dict:
+    ) -> requests.Response:
         """
         This endpoint will generate images.
 
@@ -155,7 +155,7 @@ class Leonardo:
         :param control_net_type: The type of ControlNet to use.
         :type control_net_type: str, optional
         :return: The generation response.
-        :rtype: dict
+        :rtype: requests.Response
         """
         # pylint: disable=too-many-locals
         url = "https://cloud.leonardo.ai/api/rest/v1/generations"
@@ -185,9 +185,9 @@ class Leonardo:
         try:
             response = session.post(url, json=payload)
             response.raise_for_status()
-            response = response.json()
-            self.___logger.debug(f"Post generations: {response}")
-            return response
+            response_dict = response.json()
+            self.___logger.debug(f"Post generations: {response_dict}")
+            return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while post generations: {str(error)}")
             raise error
@@ -210,9 +210,9 @@ class Leonardo:
         try:
             response = session.get(url)
             response.raise_for_status()
-            response = response.json()
-            self.___logger.debug(f"Single generations: {response}")
-            return response
+            response_dict = response.json()
+            self.___logger.debug(f"Single generations: {response_dict}")
+            return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while get single generations: {str(error)}")
             raise error
@@ -264,9 +264,9 @@ class Leonardo:
         try:
             response = session.get(url, params=params)
             response.raise_for_status()
-            response = response.json()
+            response_dict = response.json()
             self.___logger.debug(f"Generations for user {user_id} are: {response}")
-            return response
+            return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while obtaining user's generations: {str(error)}")
             raise error
@@ -332,9 +332,9 @@ class Leonardo:
         try:
             response = session.get(url)
             response.raise_for_status()
-            response = response.json()
-            self.___logger.debug(f"Single image provided: {response}")
-            return response
+            response_dict = response.json()
+            self.___logger.debug(f"Single image provided: {response_dict}")
+            return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while obtain single init image: {str(error)}")
             raise error
@@ -390,14 +390,14 @@ class Leonardo:
             self.___logger.error(f"Error occurred while up-scaling image: {str(error)}")
             raise error
 
-    def get_variation_by_id(self, generation_id: str) -> dict:
+    def get_variation_by_id(self, generation_id: str) -> requests.Response:
         """
         This endpoint will get the variation by ID.
 
         :param generation_id: The ID of the variation to get.
         :type generation_id: str
         :return: The variation.
-        :rtype: dict
+        :rtype: requests.Response
 
         Raises:
             Exception: If an error occurs while getting variation.
@@ -408,9 +408,9 @@ class Leonardo:
         try:
             response = session.get(url)
             response.raise_for_status()
-            response = response.json()
-            self.___logger.debug(f"Get variation by ID: {response}")
-            return response
+            response_dict = response.json()
+            self.___logger.debug(f"Get variation by ID: {response_dict}")
+            return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while get variation by id: {str(error)}")
             raise error
@@ -461,9 +461,9 @@ class Leonardo:
         try:
             response = session.get(url)
             response.raise_for_status()
-            response = response.json()
-            self.___logger.debug(f"Dataset with dataset_id={dataset_id} provided: {response}")
-            return response
+            response_dict = response.json()
+            self.___logger.debug(f"Dataset with dataset_id={dataset_id} provided: {response_dict}")
+            return response_dict
         except Exception as error:
             self.___logger.error(f"Error occurred while get dataset: {str(error)}")
             raise error
@@ -655,10 +655,10 @@ class Leonardo:
         try:
             response = session.get(url)
             response.raise_for_status()
-            response = response.json()
-            self.___logger.debug(f"Custom modal has been trained: {response}")
+            response_dict = response.json()
+            self.___logger.debug(f"Custom modal has been trained: {response_dict}")
             session.close()
-            return response
+            return response_dict
         except Exception as error:
             self.___logger.error(f"Error obtaining custom model: {str(error)}")
             raise error
@@ -689,7 +689,7 @@ class Leonardo:
 
     def wait_for_image_generation(
             self, generation_id: str, image_index: int = 0, poll_interval: int = 5, timeout: int = 120
-    ) -> dict:
+    ) -> requests.Response:
         """
         This method waits for the completion of image generation.
 
@@ -705,7 +705,7 @@ class Leonardo:
         :raises TimeoutError: If the image(s) have not been generated within the timeout.
         :raises IndexError: If an invalid image_index is provided.
         :return: The completed image(s) once generation is complete.
-        :rtype: dict
+        :rtype: requests.Response
 
         Raises:
             TimeoutError: If the image(s) have not been generated within the timeout.
