@@ -6,4 +6,4 @@ urllib3==2.1.0
 async-timeout==4.0.3
 certifi==2023.11.17
 charset-normalizer==3.3.2
-frozenlist==1.4.0
+frozenlist==1.4.1
