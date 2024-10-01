@@ -522,10 +522,7 @@ class Leonardo:
             response.raise_for_status()
             data = response.json()
             self.__logger.debug(
-                "Dataset with dataset_id=%s started to upload from %s: %s",
-                dataset_id,
-                file_path,
-                response
+                "Dataset with dataset_id=%s started to upload from %s: %s", dataset_id, file_path, response
             )
             upload_url = data["uploadDatasetImage"]["url"]
             fields = json.loads(data["uploadDatasetImage"]["fields"])
@@ -562,10 +559,7 @@ class Leonardo:
         url = f"https://cloud.leonardo.ai/api/rest/v1/datasets/{dataset_id}/upload/gen"
         payload = {"generatedImageId": generated_image_id}
         self.__logger.debug(
-            "Requested to upload generated_image_id=%s to dataset_id=%s: POST %s",
-            generated_image_id,
-            dataset_id,
-            url
+            "Requested to upload generated_image_id=%s to dataset_id=%s: POST %s", generated_image_id, dataset_id, url
         )
         session = self.___get_client_session("post")
         try:
@@ -575,7 +569,7 @@ class Leonardo:
                 "Image with image_id=%s has been uploaded to dataset_id=%s: %s",
                 generated_image_id,
                 dataset_id,
-                response
+                response,
             )
             session.close()
             return response
