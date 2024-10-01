@@ -288,11 +288,11 @@ class Leonardo:
         valid_extensions = ["png", "jpg", "jpeg", "webp"]
         extension = os.path.splitext(file_path)[1].strip(".")
         if extension not in valid_extensions:
-            raise ValueError("Invalid file extension. Must be one of %s", valid_extensions)
+            raise ValueError(f"Invalid file extension. Must be one of {valid_extensions}")
 
         url = "https://cloud.leonardo.ai/api/rest/v1/init-image"
         payload = {"extension": extension}
-        self.__logger.debug(f"Init image %s upload requested with payload = %s: POST %s", file_path, payload, url)
+        self.__logger.debug("Init image %s upload requested with payload = %s: POST %s", file_path, payload, url)
         session = self.___get_client_session("post")
         try:
             response = session.post(url, json=payload)
@@ -327,7 +327,7 @@ class Leonardo:
         :rtype: dict
         """
         url = f"https://cloud.leonardo.ai/api/rest/v1/init-image/{image_id}"
-        self.__logger.debug(f"Requested single image with image_id=%s: GET %s", image_id, url)
+        self.__logger.debug("Requested single image with image_id=%s: GET %s", image_id, url)
         session = self.___get_client_session("get")
         try:
             response = session.get(url)
@@ -583,7 +583,7 @@ class Leonardo:
             self.__logger.error("Error occurred while upload generated image to dataset: %s", str(error))
             raise error
 
-    def train_custom_model(
+    def train_custom_model(  # pylint: disable=too-many-positional-arguments
         self,
         name: str,
         dataset_id: str,
@@ -734,6 +734,6 @@ class Leonardo:
             time.sleep(poll_interval)
 
             if timeout_counter >= (timeout / poll_interval):
-                raise TimeoutError("Image has not been generated in %s seconds", timeout)
+                raise TimeoutError(f"Image has not been generated in {timeout} seconds")
 
             timeout_counter += 1
