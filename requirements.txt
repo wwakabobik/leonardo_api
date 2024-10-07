@@ -1,4 +1,4 @@
-aiohttp==3.10.8
+aiohttp==3.10.9
 aiofiles==24.1.0
 asyncio==3.4.3
 requests==2.32.3
