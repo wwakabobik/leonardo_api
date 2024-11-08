@@ -2,7 +2,7 @@
 """
 Filename: leonardo_sync.py
 Author: Iliya Vereshchagin
-Copyright (c) 2023. All rights reserved.
+Copyright (c) 2024. All rights reserved.
 
 Created: 29.08.2023
 Last Modified: 01.10.2024
