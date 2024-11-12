@@ -2,10 +2,10 @@
 """
 Filename: leonardo_async.py
 Author: Iliya Vereshchagin
-Copyright (c) 2023. All rights reserved.
+Copyright (c) 2024. All rights reserved.
 
 Created: 28.08.2023
-Last Modified: 24.11.2023
+Last Modified: 08.10.2024
 
 Description:
 This file contains asynchronous implementation for Leonardo.ai API
@@ -44,8 +44,8 @@ class Leonardo:
         :type logger: logging.Logger, optional
         """
         self.___auth_token = auth_token
-        self.___logger = logger if logger else setup_logger("Leonardo", "leonardo_async.log")
-        self.___logger.debug("Leonardo init complete")
+        self.__logger = logger if logger else setup_logger("Leonardo", "leonardo_async.log")
+        self.__logger.debug("Leonardo init complete")
 
     async def ___get_client_session(self, request_type: str = "get", empty: bool = False) -> aiohttp.ClientSession:
         """
@@ -79,22 +79,22 @@ class Leonardo:
         """
         url = "https://cloud.leonardo.ai/api/rest/v1/me"
 
-        self.___logger.debug(f"Requesting user info: GET {url}")
+        self.__logger.debug("Requesting user info: GET %s", url)
         session = await self.___get_client_session("get")
         try:
             async with session.get(url) as response:
                 response.raise_for_status()
                 response_dict = await response.json()
-                self.___logger.debug(f"User info: {response_dict}")
+                self.__logger.debug("User info: %s", response_dict)
                 await session.close()
                 return response_dict
         except Exception as error:
-            self.___logger.error(f"Error occurred while getting user info: {str(error)}")
+            self.__logger.error("Error occurred while getting user info: %s", str(error))
             if not session.closed:
                 await session.close()
             raise error
 
-    async def post_generations(
+    async def post_generations(  # pylint: disable=too-many-positional-arguments
         self,
         prompt: str,
         negative_prompt: Optional[str] = None,
@@ -187,17 +187,17 @@ class Leonardo:
             "controlNet": control_net,
             "controlNetType": control_net_type,
         }
-        self.___logger.debug(f"Requesting post generations: POST {url} with payload: {payload}")
+        self.__logger.debug("Requesting post generations: POST %s with payload: %s", url, payload)
         session = await self.___get_client_session("post")
         try:
             async with session.post(url, json=payload) as response:
                 response.raise_for_status()
                 response_dict = await response.json()
-                self.___logger.debug(f"Post generations: {response_dict}")
+                self.__logger.debug("Post generations: %s", response_dict)
                 await session.close()
                 return response_dict
         except Exception as error:
-            self.___logger.error(f"Error occurred while post generations: {str(error)}")
+            self.__logger.error("Error occurred while post generations: %s", str(error))
             if not session.closed:
                 await session.close()
             raise error
@@ -215,17 +215,17 @@ class Leonardo:
             Exception: if error occurred while get single generation
         """
         url = f"https://cloud.leonardo.ai/api/rest/v1/generations/{generation_id}"
-        self.___logger.debug(f"Requested single generations: GET {url} with generation_id={generation_id}")
+        self.__logger.debug("Requested single generations: GET %s with generation_id=%s", url, generation_id)
         session = await self.___get_client_session("get")
         try:
             async with session.get(url) as response:
                 response.raise_for_status()
                 response_dict = await response.json()
-                self.___logger.debug(f"Single generations: {response}")
+                self.__logger.debug("Single generations: %s", response)
                 await session.close()
                 return response_dict
         except Exception as error:
-            self.___logger.error(f"Error occurred while get single generations: {str(error)}")
+            self.__logger.error("Error occurred while get single generations: %s", str(error))
             if not session.closed:
                 await session.close()
             raise
@@ -243,16 +243,16 @@ class Leonardo:
             Exception: if error occurred while delete single generation
         """
         url = f"https://cloud.leonardo.ai/api/rest/v1/generations/{generation_id}"
-        self.___logger.debug(f"Delete generations with generation_id={generation_id}: DELETE {url}")
+        self.__logger.debug("Delete generations with generation_id=%s: DELETE %s", generation_id, url)
         session = await self.___get_client_session("delete")
         try:
             async with session.delete(url) as response:
                 response.raise_for_status()
-                self.___logger.debug(f"Generations {generation_id} has been deleted: {response}")
+                self.__logger.debug("Generations %s has been deleted: %s", generation_id, response)
                 await session.close()
                 return response
         except Exception as error:
-            self.___logger.error(f"Error occurred while delete generation: {str(error)}")
+            self.__logger.error("Error occurred while delete generation: %s", str(error))
             if not session.closed:
                 await session.close()
             raise error
@@ -275,17 +275,17 @@ class Leonardo:
         """
         url = f"https://cloud.leonardo.ai/api/rest/v1/generations/user/{user_id}"
         params = {"offset": offset, "limit": limit}
-        self.___logger.debug(f"Requested generations for {user_id} with params {params}: GET {url}")
+        self.__logger.debug("Requested generations for %s with params %s: GET %s", user_id, params, url)
         session = await self.___get_client_session("get")
         try:
             async with session.get(url, params=params) as response:
                 response.raise_for_status()
                 response_dict = await response.json()
-                self.___logger.debug(f"Generations for user {user_id} are: {response_dict}")
+                self.__logger.debug("Generations for user %s are: %s", user_id, response_dict)
                 await session.close()
                 return response_dict
         except Exception as error:
-            self.___logger.error(f"Error occurred while obtaining user's generations: {str(error)}")
+            self.__logger.error("Error occurred while obtaining user's generations: %s", str(error))
             if not session.closed:
                 await session.close()
             raise error
@@ -310,19 +310,19 @@ class Leonardo:
 
         url = "https://cloud.leonardo.ai/api/rest/v1/init-image"
         payload = {"extension": extension}
-        self.___logger.debug(f"Init image {file_path} upload requested with payload = {payload}: POST {url}")
+        self.__logger.debug("Init image %s upload requested with payload = %s: POST %s", file_path, payload, url)
         session = await self.___get_client_session("post")
         try:
             async with session.post(url, json=payload) as response:
                 response.raise_for_status()
                 data = await response.json()
                 await session.close()
-            self.___logger.debug(f"Init image {file_path} initiated as: {data['uploadInitImage']['url']}")
+            self.__logger.debug("Init image %s initiated as: %s", file_path, data["uploadInitImage"]["url"])
             generation_id = data["uploadInitImage"]["id"]
             upload_url = data["uploadInitImage"]["url"]
             fields = json.loads(data["uploadInitImage"]["fields"])
 
-            self.___logger.debug(f"Init image {file_path} uploading with as binary: POST {upload_url}")
+            self.__logger.debug("Init image %s uploading with as binary: POST %s", file_path, upload_url)
             async with aiofiles.open(file_path, "rb") as file:
                 file_data = await file.read()
                 data = aiohttp.FormData()
@@ -332,11 +332,13 @@ class Leonardo:
                 session = await self.___get_client_session("post", empty=True)
                 async with session.post(upload_url, data=data) as response:
                     response.raise_for_status()
-                    self.___logger.debug(f"Init image {file_path} has been uploaded, generation_id is: {generation_id}")
+                    self.__logger.debug(
+                        "Init image %s has been uploaded, generation_id is: %s", file_path, generation_id
+                    )
                     await session.close()
                     return generation_id
         except Exception as error:
-            self.___logger.error(f"Error occurred while upload init image: {str(error)}")
+            self.__logger.error("Error occurred while upload init image: %s", str(error))
             if not session.closed:
                 await session.close()
             raise error
@@ -354,17 +356,17 @@ class Leonardo:
             Exception: if error occurred while get single init image
         """
         url = f"https://cloud.leonardo.ai/api/rest/v1/init-image/{image_id}"
-        self.___logger.debug(f"Requested single image with image_id={image_id}: GET {url}")
+        self.__logger.debug("Requested single image with image_id=%s: GET %s", image_id, url)
         session = await self.___get_client_session("get")
         try:
             async with session.get(url) as response:
                 response.raise_for_status()
                 response_dict = await response.json()
-                self.___logger.debug(f"Single image provided: {response_dict}")
+                self.__logger.debug("Single image provided: %s", response_dict)
                 await session.close()
                 return response_dict
         except Exception as error:
-            self.___logger.error(f"Error occurred while obtain single init image: {str(error)}")
+            self.__logger.error("Error occurred while obtain single init image: %s", str(error))
             if not session.closed:
                 await session.close()
             raise
@@ -382,16 +384,16 @@ class Leonardo:
             Exception: if error occurred while delete init image
         """
         url = f"https://cloud.leonardo.ai/api/rest/v1/init-image/{image_id}"
-        self.___logger.debug(f"Requested to delete single image with image_id={image_id}: DELETE {url}")
+        self.__logger.debug("Requested to delete single image with image_id=%s: DELETE %s", image_id, url)
         session = await self.___get_client_session("delete")
         try:
             async with session.delete(url) as response:
                 response.raise_for_status()
-                self.___logger.debug(f"Single image deleted: {response}")
+                self.__logger.debug("Single image deleted: %s", response)
                 await session.close()
                 return response
         except Exception as error:
-            self.___logger.error(f"Error occurred while deleting init image: {str(error)}")
+            self.__logger.error("Error occurred while deleting init image: %s", str(error))
             if not session.closed:
                 await session.close()
             raise error
@@ -410,17 +412,17 @@ class Leonardo:
         """
         url = "https://cloud.leonardo.ai/api/rest/v1/variations/upscale"
         payload = {"id": image_id}
-        self.___logger.debug(f"Requested to upscale image with payload {payload}: POST {url}")
+        self.__logger.debug("Requested to upscale image with payload %s: POST %s", payload, url)
         session = await self.___get_client_session("post")
         try:
             async with session.post(url, json=payload) as response:
                 response.raise_for_status()
                 response_dict = await response.json()
-                self.___logger.debug(f"Upscale created: {response_dict}")
+                self.__logger.debug("Upscale created: %s", response_dict)
                 await session.close()
                 return response_dict
         except Exception as error:
-            self.___logger.error(f"Error occurred while up-scaling image: {str(error)}")
+            self.__logger.error("Error occurred while up-scaling image: %s", str(error))
             if not session.closed:
                 await session.close()
             raise error
@@ -438,17 +440,17 @@ class Leonardo:
             Exception: if error occurred while get variation by id
         """
         url = f"https://cloud.leonardo.ai/api/rest/v1/variations/{generation_id}"
-        self.___logger.debug(f"Requested to obtain variation by id {generation_id}: GET {url}")
+        self.__logger.debug("Requested to obtain variation by id %s: GET %s", generation_id, url)
         session = await self.___get_client_session("get")
         try:
             async with session.get(url) as response:
                 response.raise_for_status()
                 response_dict = await response.json()
-                self.___logger.debug(f"Get variation by ID: {response_dict}")
+                self.__logger.debug("Get variation by ID: %s", response_dict)
                 await session.close()
                 return response_dict
         except Exception as error:
-            self.___logger.error(f"Error occurred while get variation by id: {str(error)}")
+            self.__logger.error("Error occurred while get variation by id: %s", str(error))
             if not session.closed:
                 await session.close()
             raise error
@@ -469,16 +471,16 @@ class Leonardo:
         """
         url = "https://cloud.leonardo.ai/api/rest/v1/datasets"
         payload = {"name": name, "description": description}
-        self.___logger.debug(f"Requested to create dataset with payload {payload}: POST {url}")
+        self.__logger.debug("Requested to create dataset with payload %s: POST %s", payload, url)
         session = await self.___get_client_session("post")
         try:
             async with session.post(url, json=payload) as response:
                 response.raise_for_status()
-                self.___logger.debug(f"Dataset has been created: {response}")
+                self.__logger.debug("Dataset has been created: %s", response)
                 await session.close()
                 return response
         except Exception as error:
-            self.___logger.error(f"Error occurred while create dataset: {str(error)}")
+            self.__logger.error("Error occurred while create dataset: %s", str(error))
             if not session.closed:
                 await session.close()
             raise error
@@ -496,17 +498,17 @@ class Leonardo:
             Exception: if error occurred while get dataset by id
         """
         url = f"https://cloud.leonardo.ai/api/rest/v1/datasets/{dataset_id}"
-        self.___logger.debug(f"Requested to obtain dataset dataset_id={dataset_id}: GET {url}")
+        self.__logger.debug("Requested to obtain dataset dataset_id=%s: GET %s", dataset_id, url)
         session = await self.___get_client_session("get")
         try:
             async with session.get(url) as response:
                 response.raise_for_status()
                 response_dict = await response.json()
-                self.___logger.debug(f"Dataset with dataset_id={dataset_id} provided: {response_dict}")
+                self.__logger.debug("Dataset with dataset_id=%s, provided: %s", dataset_id, response_dict)
                 await session.close()
                 return response_dict
         except Exception as error:
-            self.___logger.error(f"Error occurred while get dataset: {str(error)}")
+            self.__logger.error("Error occurred while get dataset: %s", str(error))
             if not session.closed:
                 await session.close()
             raise
@@ -524,16 +526,16 @@ class Leonardo:
             Exception: if error occurred while delete dataset by id
         """
         url = f"https://cloud.leonardo.ai/api/rest/v1/datasets/{dataset_id}"
-        self.___logger.debug(f"Requested to delete dataset dataset_id={dataset_id}: DELETE {url}")
+        self.__logger.debug("Requested to delete dataset dataset_id=%s: DELETE %s", dataset_id, url)
         session = await self.___get_client_session("delete")
         try:
             async with session.delete(url) as response:
                 response.raise_for_status()
-                self.___logger.debug(f"Dataset with dataset_id={dataset_id} has been deleted: {response}")
+                self.__logger.debug("Dataset with dataset_id=%s has been deleted: %s", dataset_id, response)
                 await session.close()
                 return response
         except Exception as error:
-            self.___logger.error(f"Error occurred while delete dataset: {str(error)}")
+            self.__logger.error("Error occurred while delete dataset: %s", str(error))
             if not session.closed:
                 await session.close()
             raise error
@@ -561,21 +563,23 @@ class Leonardo:
         url = f"https://cloud.leonardo.ai/api/rest/v1/datasets/{dataset_id}/upload"
 
         payload = {"extension": extension}
-        self.___logger.debug(f"Requested to upload dataset_id={dataset_id} from {file_path}: POST {url}")
+        self.__logger.debug("Requested to upload dataset_id=%s from %s: POST %s", dataset_id, file_path, url)
         session = await self.___get_client_session("post")
         try:
             async with session.post(url, json=payload) as response:
                 response.raise_for_status()
                 data = await response.json()
                 await session.close()
-            self.___logger.debug(
-                f"Dataset with dataset_id={dataset_id} started to upload from {file_path} as "
-                f"{data['uploadDatasetImage']['url']}"
+            self.__logger.debug(
+                "Dataset with dataset_id=%s started to upload from %s as %s",
+                dataset_id,
+                file_path,
+                data["uploadDatasetImage"]["url"],
             )
             upload_url = data["uploadDatasetImage"]["url"]
             fields = json.loads(data["uploadDatasetImage"]["fields"])
 
-            self.___logger.debug(f"Uploading dataset_id={dataset_id} from {file_path}: POST {url}")
+            self.__logger.debug("Uploading dataset_id=%s from %s: POST %s", dataset_id, file_path, url)
             async with aiofiles.open(file_path, "rb") as file:
                 file_data = await file.read()
                 data = aiohttp.FormData()
@@ -585,11 +589,13 @@ class Leonardo:
                 session = await self.___get_client_session("post", empty=True)
                 async with session.post(upload_url, data=fields) as response:
                     response.raise_for_status()
-                    self.___logger.debug(f"Dataset with dataset_id={dataset_id} uploaded using {file_path}: {response}")
+                    self.__logger.debug(
+                        "Dataset with dataset_id=%s uploaded using %s: %s", dataset_id, file_path, response
+                    )
                     await session.close()
                     return response
         except Exception as error:
-            self.___logger.error(f"Error occurred uploading dataset: {str(error)}")
+            self.__logger.error("Error occurred uploading dataset: %s", str(error))
             if not session.closed:
                 await session.close()
             raise
@@ -612,26 +618,28 @@ class Leonardo:
         """
         url = f"https://cloud.leonardo.ai/api/rest/v1/datasets/{dataset_id}/upload/gen"
         payload = {"generatedImageId": generated_image_id}
-        self.___logger.debug(
-            f"Requested to upload generated_image_id={generated_image_id} " f"to dataset_id={dataset_id}: POST {url}"
+        self.__logger.debug(
+            "Requested to upload generated_image_id=%s to dataset_id=%s: POST %s", generated_image_id, dataset_id, url
         )
         session = await self.___get_client_session("post")
         try:
             async with session.post(url, json=payload) as response:
                 response.raise_for_status()
-                self.___logger.debug(
-                    f"Image with image_id={generated_image_id} has been uploaded to "
-                    f"dataset_id={dataset_id}: {response}"
+                self.__logger.debug(
+                    "Image with image_id=%s has been uploaded to dataset_id=%s: %s",
+                    generated_image_id,
+                    dataset_id,
+                    response,
                 )
                 await session.close()
                 return response
         except Exception as error:
-            self.___logger.error(f"Error occurred while upload generated image to dataset: {str(error)}")
+            self.__logger.error("Error occurred while upload generated image to dataset: %s", str(error))
             if not session.closed:
                 await session.close()
             raise
 
-    async def train_custom_model(
+    async def train_custom_model(  # pylint: disable=too-many-positional-arguments
         self,
         name: str,
         dataset_id: str,
@@ -683,16 +691,16 @@ class Leonardo:
             "sd_Version": sd_version,
             "strength": strength,
         }
-        self.___logger.debug(f"Requested to train custom model with payload {payload}: POST {url}")
+        self.__logger.debug("Requested to train custom model with payload %s: POST %s", payload, url)
         session = await self.___get_client_session("post")
         try:
             async with session.post(url, json=payload) as response:
                 response.raise_for_status()
-                self.___logger.debug(f"Custom modal has been trained: {response}")
+                self.__logger.debug("Custom modal has been trained: %s", response)
                 await session.close()
                 return response
         except Exception as error:
-            self.___logger.error(f"Error training custom model: {str(error)}")
+            self.__logger.error("Error training custom model: %s", str(error))
             if not session.closed:
                 await session.close()
             raise error
@@ -710,17 +718,17 @@ class Leonardo:
             Exception: if error occurred while get custom model by id
         """
         url = f"https://cloud.leonardo.ai/api/rest/v1/models/{model_id}"
-        self.___logger.debug(f"Requested to obtain custom model by model_id={model_id}: GET {url}")
+        self.__logger.debug("Requested to obtain custom model by model_id=%s: GET %s", model_id, url)
         session = await self.___get_client_session("get")
         try:
             async with session.get(url) as response:
                 response.raise_for_status()
                 response_dict = await response.json()
-                self.___logger.debug(f"Custom modal has been trained: {response_dict}")
+                self.__logger.debug("Custom modal has been trained: %s", response_dict)
                 await session.close()
                 return response_dict
         except Exception as error:
-            self.___logger.error(f"Error obtaining custom model: {str(error)}")
+            self.__logger.error("Error obtaining custom model: %s", str(error))
             if not session.closed:
                 await session.close()
             raise
@@ -738,16 +746,16 @@ class Leonardo:
             Exception: if error occurred while delete custom model by id
         """
         url = f"https://cloud.leonardo.ai/api/rest/v1/models/{model_id}"
-        self.___logger.debug(f"Requested to delete custom model by model_id={model_id}: GET {url}")
+        self.__logger.debug("Requested to delete custom model by model_id=%s: GET %s", model_id, url)
         session = await self.___get_client_session("delete")
         try:
             async with session.delete(url) as response:
                 response.raise_for_status()
-                self.___logger.debug(f"Custom modal has been deleted: {response}")
+                self.__logger.debug("Custom modal has been deleted: %s", response)
                 await session.close()
                 return response
         except Exception as error:
-            self.___logger.error(f"Error delete custom model: {str(error)}")
+            self.__logger.error("Error delete custom model: %s", str(error))
             if not session.closed:
                 await session.close()
             raise error
