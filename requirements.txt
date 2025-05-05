@@ -5,5 +5,5 @@ requests==2.32.3
 urllib3==2.4.0
 async-timeout>=4.0.3
 certifi==2025.4.26
-charset-normalizer==3.4.1
+charset-normalizer==3.4.2
 frozenlist==1.6.0
