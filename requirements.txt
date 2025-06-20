@@ -4,6 +4,6 @@ asyncio==3.4.3
 requests==2.32.4
 urllib3==2.4.0
 async-timeout>=4.0.3
-certifi==2025.4.26
+certifi==2025.6.15
 charset-normalizer==3.4.2
 frozenlist==1.6.2
