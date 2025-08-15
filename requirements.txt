@@ -1,6 +1,6 @@
 aiohttp==3.12.14
 aiofiles==24.1.0
-asyncio==3.4.3
+asyncio==4.0.0
 requests==2.32.4
 urllib3==2.5.0
 async-timeout>=4.0.3
