@@ -1,9 +1,9 @@
-aiohttp==3.12.14
+aiohttp==3.12.15
 aiofiles==24.1.0
-asyncio==3.4.3
+asyncio==4.0.0
 requests==2.32.4
 urllib3==2.5.0
 async-timeout>=4.0.3
 certifi==2025.8.3
-charset-normalizer==3.4.2
+charset-normalizer==3.4.3
 frozenlist==1.7.0
