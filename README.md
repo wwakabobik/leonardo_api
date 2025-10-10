@@ -93,4 +93,4 @@ Which contains details of models like following:
 Have fun and enjoy!
 
 ## Donations
-If you like this project, you can support it by donating via [DonationAlerts](https://www.donationalerts.com/r/rocketsciencegeek).
+If you like this project, you can support it by donating via [DonationAlerts](https://www.donationalerts.com/r/rocketsciencegeek) or [BuyMeACoffee](https://www.buymeacoffee.com/wwakabobik) or [ThanksDev](https://thanks.dev/wwakabobik).
