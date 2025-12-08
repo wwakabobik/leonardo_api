@@ -2,7 +2,7 @@ aiohttp==3.13.2
 aiofiles==25.1.0
 asyncio==4.0.0
 requests==2.32.5
-urllib3==2.5.0
+urllib3==2.6.0
 async-timeout>=4.0.3
 certifi==2025.11.12
 charset-normalizer==3.4.4
