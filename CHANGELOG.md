@@ -79,3 +79,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Fixed
 - Fixed Black formatting compliance (missing blank line after module docstring) in `__init__.py`, `src/__init__.py`, `src/__main__.py`, `src/leonardo_api/__init__.py`; this was failing the master `Linters` workflow (pre-existing, unrelated to Python version support)
+
+## [0.0.14] - 2026-07-07
+
+### Added
+- Added Python 3.14 support: verified dependency install and imports on 3.14, added it to `classifiers` and both CI matrices
