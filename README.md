@@ -3,7 +3,7 @@
 [![PyPI version](https://badge.fury.io/py/leonardo-api.svg)](https://badge.fury.io/py/leonardo-api) 
 [![Linters](https://github.com/wwakabobik/leonardo_api/actions/workflows/master-linters.yml/badge.svg?branch=master)](https://github.com/wwakabobik/leonardo_api/actions/workflows/master-linters.yml)
 ![PyPI - License](https://img.shields.io/pypi/l/leonardo-api)
-![PyPI - Python Version](https://img.shields.io/pypi/pyversions/leonardo-api) 
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/leonardo-api?cacheSeconds=1) 
 [![Downloads](https://static.pepy.tech/badge/leonardo-api)](https://pepy.tech/project/leonardo-api)
 [![Downloads](https://static.pepy.tech/badge/leonardo-api/month)](https://pepy.tech/project/leonardo-api)
 
