@@ -69,3 +69,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Fixed
 - Fixed linters problems (logging)
 - Bumped requirements & badges
+
+## [0.0.12] - 2026-07-07
+
+### Changed
+- Dropped Python 3.9 support: pinned dependencies (aiohttp, requests, urllib3) already require Python >=3.10, so `python_requires`/CI matrix now start at 3.10
