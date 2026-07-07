@@ -74,3 +74,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 - Dropped Python 3.9 support: pinned dependencies (aiohttp, requests, urllib3) already require Python >=3.10, so `python_requires`/CI matrix now start at 3.10
+
+## [0.0.13] - 2026-07-07
+
+### Fixed
+- Fixed Black formatting compliance (missing blank line after module docstring) in `__init__.py`, `src/__init__.py`, `src/__main__.py`, `src/leonardo_api/__init__.py`; this was failing the master `Linters` workflow (pre-existing, unrelated to Python version support)
